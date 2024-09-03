@@ -1,0 +1,62 @@
+.group {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+
+    .group-header {
+        position: relative;
+        display: block;
+        padding-bottom: 15px;
+
+        font-weight: bold;
+        font-size: 16px;
+
+        .group-name-input {
+            width: 300px;
+            padding-left: 0;
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid black;
+
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .group-name-input:focus {
+            box-shadow: none;
+        }
+
+        .delete-group-icon {
+            position: absolute;
+            right: 15px;
+            top: 5px;
+
+            cursor: pointer;
+        }
+    }
+    .skill-tag {
+        height: 36px;
+        padding: 7px 12px;
+        margin: 8px 5px;
+
+        user-select: none;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    .skill-tag:hover {
+        opacity: 0.7;
+        transition: 0.5s;
+    }
+    .skill-input {
+        width: 150px;
+        height: 36px;
+        padding: 7px 12px;
+        margin: 8px 5px;
+
+        font-size: 14px;
+    }
+    .new-skill-tag {
+        border-style: dashed;
+    }
+}

@@ -1,0 +1,104 @@
+import { useResumeEditing, useStoreProjects } from "@/app/cv/builder/hooks";
+import { Button, Card, Form, Input, message } from "antd";
+import { type ResumeProjects } from "@/store/resume-slice";
+import ResumeSectionEditorLayout from "../resume-section-editor-layout";
+import styles from "./index.module.scss";
+import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
+import clsx from "clsx";
+import { useEffect, useState } from "react";
+import RichTextEditor from "../../rich-text-editor";
+
+export default function ResumeProjectsEditor() {
+  const { storeGetProjects, storeSetProjects } = useStoreProjects();
+  const { storeSetIsEditingResume } = useResumeEditing();
+  const [form] = Form.useForm<{ items: ResumeProjects }>();
+  const [projects] = useState<ResumeProjects>(storeGetProjects());
+  useEffect(() => {
+    form.setFieldsValue({ items: projects });
+  }, [projects, form]);
+
+  function handleSave() {
+    form
+      .validateFields()
+      .then((values) => {
+        storeSetProjects(values.items);
+        storeSetIsEditingResume(false);
+        message.success("Changes saved successfully");
+      })
+      .catch(() => {
+        message.error("Failed to save changes!");
+      });
+  }
+
+  return (
+    <ResumeSectionEditorLayout title="Projects">
+      <div className={styles.projects}>
+        <Form form={form} layout="vertical">
+          <Form.List name="items">
+            {(fields, { add, remove }) => (
+              <>
+                {fields.map(({ key, name, ...restField }, idx) => (
+                  <Card
+                    className={styles.card}
+                    size="small"
+                    title={`Project ${idx + 1}`}
+                    key={key}
+                    extra={
+                      <CloseOutlined
+                        onClick={() => {
+                          remove(name);
+                        }}
+                      />
+                    }
+                  >
+                    <Form.Item
+                      {...restField}
+                      name={[name, "title"]}
+                      label="Title"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input project title",
+                        },
+                      ]}
+                    >
+                      <Input required />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, "description"]}
+                      label="Description"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input project description",
+                        },
+                      ]}
+                    >
+                      <RichTextEditor />
+                    </Form.Item>
+                  </Card>
+                ))}
+                <Form.Item>
+                  <Button
+                    type="dashed"
+                    className={clsx([styles["button"], styles["add-button"]])}
+                    onClick={() => add()}
+                    block
+                    icon={<PlusOutlined />}
+                  >
+                    Add Project
+                  </Button>
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
+        </Form>
+      </div>
+
+      <Button type="primary" className={styles["button"]} onClick={handleSave}>
+        Save
+      </Button>
+    </ResumeSectionEditorLayout>
+  );
+}

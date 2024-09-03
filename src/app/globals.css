@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media print {
+  body {
+    width: 210mm;
+    height: 297mm;
+  }
+}

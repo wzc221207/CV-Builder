@@ -1,0 +1,32 @@
+.editor {
+    padding: 10px 20px;
+    border: 1px solid #d9d9d9;
+    border-radius: 12px;
+
+    background-color: white;
+
+    *:focus {
+        outline: none;
+    }
+
+    ul, ol {
+        margin: 0.7rem;
+
+        li p {
+            margin-top: 0.25em;
+            margin-bottom: 0.25em;
+        }
+    }
+}
+
+.editor-readonly {
+
+    ul,ol {
+        padding: 0 1rem;
+
+        li p {
+            margin-top: 0.25em;
+            margin-bottom: 0.25em;
+        }
+    }
+}
