@@ -1,10 +1,9 @@
 import { Typography } from "antd";
-import { useAppSelector } from "@/store";
-import ResumeSection from "../resume-section-display-layout";
 
-import styles from "./index.module.scss";
-import RichTextEditor from "../../rich-text-editor";
 import { useStoreProjects } from "../../../hooks";
+import RichTextEditor from "../../rich-text-editor";
+import ResumeSection from "../resume-section-display-layout";
+import styles from "./index.module.scss";
 
 export default function ResumeProjects() {
   const { storeGetProjects } = useStoreProjects();

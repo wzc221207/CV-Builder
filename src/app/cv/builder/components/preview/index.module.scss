@@ -1,0 +1,20 @@
+.preview {
+    width: 210mm;
+    height: 297mm;
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px 10px #f3f4f6;
+
+    .sections {
+        padding: 10px;
+    }
+}
+
+@media print {
+    .preview {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0px !important;
+        box-shadow: none !important;
+        overflow-x: hidden !important;
+    }
+}

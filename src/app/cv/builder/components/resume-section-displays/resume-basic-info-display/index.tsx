@@ -1,9 +1,8 @@
 import { EnvironmentFilled, MailFilled, PhoneFilled } from "@ant-design/icons";
 import { Col, Row, Space, Typography } from "antd";
-import { useAppSelector } from "@/store";
 
-import styles from "./index.module.scss";
 import { useStoreBasicInfo } from "../../../hooks";
+import styles from "./index.module.scss";
 
 export default function ResumeBasicInfo() {
   const { storeGetBasicInfo } = useStoreBasicInfo();

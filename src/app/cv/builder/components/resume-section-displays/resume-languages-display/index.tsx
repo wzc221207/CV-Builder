@@ -1,9 +1,8 @@
 import { Col, Row, Typography } from "antd";
-import { useAppSelector } from "@/store";
-import ResumeSection from "../resume-section-display-layout";
 
-import styles from "./index.module.scss";
 import { useStoreLanguages } from "../../../hooks";
+import ResumeSection from "../resume-section-display-layout";
+import styles from "./index.module.scss";
 
 export default function ResumeLanguages() {
   const { storeGetLanguages } = useStoreLanguages();

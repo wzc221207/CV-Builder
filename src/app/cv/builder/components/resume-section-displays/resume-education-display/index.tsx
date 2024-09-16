@@ -1,11 +1,10 @@
 import { dateFormat } from "@/app/cv/builder/constants";
-import { useAppSelector } from "@/store";
 import { CalendarFilled, EnvironmentFilled } from "@ant-design/icons";
 import { Space, Typography } from "antd";
 
+import { useStoreEducation } from "../../../hooks";
 import ResumeSection from "../resume-section-display-layout";
 import styles from "./index.module.scss";
-import { useStoreEducation } from "../../../hooks";
 
 export default function ResumeEducation() {
   const { storeGetEducation } = useStoreEducation();

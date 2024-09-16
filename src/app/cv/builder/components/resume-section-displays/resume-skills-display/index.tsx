@@ -1,8 +1,8 @@
 import { Tag, Typography } from "antd";
-import { useAppSelector } from "@/store";
+
+import { useStoreSkills } from "../../../hooks";
 import ResumeSection from "../resume-section-display-layout";
 import styles from "./resume-skills.module.scss";
-import { useStoreSkills } from "../../../hooks";
 
 export default function ResumeSkills() {
   const { storeGetSkills } = useStoreSkills();

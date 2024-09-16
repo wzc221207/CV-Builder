@@ -1,12 +1,11 @@
 import { dateFormat } from "@/app/cv/builder/constants";
-import { useAppSelector } from "@/store";
 import { CalendarFilled, EnvironmentFilled } from "@ant-design/icons";
 import { Space, Typography } from "antd";
 
+import { useStoreExperience } from "../../../hooks";
+import RichTextEditor from "../../rich-text-editor";
 import ResumeSection from "../resume-section-display-layout";
 import styles from "./index.module.scss";
-import RichTextEditor from "../../rich-text-editor";
-import { useStoreExperience } from "../../../hooks";
 
 export default function ResumeExperience() {
   const { storeGetExperience } = useStoreExperience();
