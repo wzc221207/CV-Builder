@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 (2024-09-17)
+
+Fixes
+- Fix builder page FOUC
+
 ## 0.1.0 (2024-09-16)
 
 Features

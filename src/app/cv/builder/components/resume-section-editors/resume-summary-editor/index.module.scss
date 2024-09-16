@@ -1,11 +1,13 @@
-.form {
+.form-container {
     padding: 15px;
     margin-bottom: 30px;
     border: 1px solid #e5e7eb;
     border-radius: 5px;
 
     background-color: white;
+}
 
+.form {
     .self-summary {
         padding: 15px;
         height: 200px !important;
@@ -14,7 +16,7 @@
 }
 
 .save-button {
-    height: 45px;
+    height: 45px !important;
     width: 100%;
     border-radius: 10px;
     margin-bottom: 20px;

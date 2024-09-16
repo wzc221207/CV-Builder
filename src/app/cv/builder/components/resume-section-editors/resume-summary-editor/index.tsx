@@ -27,33 +27,35 @@ export default function ResumeSummaryEditor() {
 
   return (
     <ResumeSectionEditorLayout title="Summary">
-      <Form
-        form={form}
-        layout="vertical"
-        autoComplete="off"
-        onFinish={handleSave}
-        className={styles["form"]}
-      >
-        <Form.Item
-          name="selfSummary"
-          label="Self Summary"
-          rules={[
-            {
-              required: true,
-              message: "Please input your summary!",
-            },
-          ]}
+      <div className={styles["form-container"]}>
+        <Form
+          form={form}
+          layout="vertical"
+          autoComplete="off"
+          onFinish={handleSave}
+          className={styles["form"]}
         >
-          <RichTextEditor />
-        </Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          className={styles["save-button"]}
-        >
-          Save
-        </Button>
-      </Form>
+          <Form.Item
+            name="selfSummary"
+            label="Self Summary"
+            rules={[
+              {
+                required: true,
+                message: "Please input your summary!",
+              },
+            ]}
+          >
+            <RichTextEditor />
+          </Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className={styles["save-button"]}
+          >
+            Save
+          </Button>
+        </Form>
+      </div>
     </ResumeSectionEditorLayout>
   );
 }
