@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3 (2024-09-18)
+
+Fixes
+- show scrollbar for the sidebar
+
 ## 0.1.2 (2024-09-18)
 
 Features
