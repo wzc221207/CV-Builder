@@ -58,18 +58,20 @@ export interface ResumeLanguage {
 
 export type ResumeLanguages = ResumeLanguage[];
 
+export type ResumeSections = {
+  basicInfo: ResumeBasicInfo;
+  summary: ResumeSummary;
+  skills: ResumeSkills;
+  experience: ResumeExperience;
+  eudcation: ResumeEducation;
+  projects: ResumeProjects;
+  languages: ResumeLanguages;
+};
+
 export interface ResumeState {
   isEditingResume: boolean;
   sectionEditor: () => JSX.Element;
-  sections: {
-    basicInfo: ResumeBasicInfo;
-    summary: ResumeSummary;
-    skills: ResumeSkills;
-    experience: ResumeExperience;
-    eudcation: ResumeEducation;
-    projects: ResumeProjects;
-    languages: ResumeLanguages;
-  };
+  sections: ResumeSections;
 }
 
 const initialState: ResumeState = defaultResumeState;
@@ -105,6 +107,9 @@ const userSlice = createSlice({
     setSectionLanguages(state, action: PayloadAction<ResumeLanguages>) {
       state.sections.languages = action.payload;
     },
+    setSections(state, action: PayloadAction<ResumeSections>) {
+      state.sections = action.payload;
+    },
   },
 });
 
@@ -118,5 +123,6 @@ export const {
   setSectionEducation,
   setSectionProjects,
   setSectionLanguages,
+  setSections
 } = userSlice.actions;
 export default userSlice.reducer;

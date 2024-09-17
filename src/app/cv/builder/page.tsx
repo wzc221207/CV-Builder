@@ -4,9 +4,14 @@ import { Provider as ReduxProvider } from "react-redux";
 import store from "@/store";
 
 import styles from "./page.module.scss";
-import Sidebar from "./components/sidebar/Sidebar";
 import { sectionEditors } from "./constants";
-import Preview from "./components/preview";
+import dynamic from "next/dynamic";
+const Sidebar = dynamic(() => import("./components/sidebar/Sidebar"), {
+  ssr: false,
+});
+const Preview = dynamic(() => import("./components/preview"), {
+  ssr: false,
+});
 
 export default function ResumeBuilder() {
   return (

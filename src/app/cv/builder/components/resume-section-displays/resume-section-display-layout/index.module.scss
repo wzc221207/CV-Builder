@@ -1,5 +1,5 @@
 .section {
-    padding: 15px;
+    padding: 10px;
 
     .title {
         border-bottom: 2px solid black;
@@ -11,10 +11,4 @@
     .content {
         padding-top: 10px;
     }
-}
-
-.section:hover {
-    transition: all 0.5s;
-    cursor: pointer;
-    background-color: #f3f4f6;
 }

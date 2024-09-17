@@ -17,12 +17,12 @@ export default function Preview() {
           <Col span={14}>
             <ResumeSummary />
             <ResumeExperience />
-            <ResumeLanguages />
+            <ResumeProjects />
           </Col>
           <Col span={10}>
             <ResumeSkills />
             <ResumeEducation />
-            <ResumeProjects />
+            <ResumeLanguages />
           </Col>
         </Row>
       </div>

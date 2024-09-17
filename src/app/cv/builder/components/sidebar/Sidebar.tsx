@@ -1,11 +1,23 @@
-import { Button, Divider, Typography } from "antd";
-import { RightOutlined } from "@ant-design/icons";
-import { useAppDispatch, useAppSelector } from "@/store";
-
-import styles from "./sidebar.module.scss";
-import { setIsEditingResume, setSectionEditor } from "@/store/resume-slice";
 import { siteName } from "@/constants/meta";
+import { useAppDispatch, useAppSelector } from "@/store";
+import {
+  ResumeSections,
+  setIsEditingResume,
+  setSectionEditor,
+  setSections,
+} from "@/store/resume-slice";
+import { RightOutlined } from "@ant-design/icons";
+import { useLocalStorageState } from "ahooks";
+import { Button, Checkbox, Divider, Typography } from "antd";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { useEffect } from "react";
+
 import ActionButton from "../action-button";
+import styles from "./sidebar.module.scss";
+import dayjs from "dayjs";
+
+const ALLOW_LOCAL_DATA_STORAGE_KEY = "allow-local-data-storage";
+const RESUME_DATA_KEY = "resume-data";
 
 export default function Sidebar({
   sections,
@@ -14,9 +26,46 @@ export default function Sidebar({
 }) {
   const resumeStore = useAppSelector((state) => state.resume);
   const dispatch = useAppDispatch();
+  const [allowDataLocalStorage, setAllowDataLocalStorage] =
+    useLocalStorageState(ALLOW_LOCAL_DATA_STORAGE_KEY, {
+      defaultValue: false,
+    });
+  const [storedResumeData, setStoredResumeData] = useLocalStorageState<
+    ResumeSections | undefined
+  >(RESUME_DATA_KEY, {
+    defaultValue: undefined,
+    deserializer: (val) => {
+      return JSON.parse(val, (k, v) => {
+        const dateFields = ["startDate", "endDate", "graduationDate"];
+        if (dateFields.includes(k)) {
+          return dayjs(v);
+        }
+        return v;
+      });
+    },
+  });
+  useEffect(() => {
+    if (allowDataLocalStorage && storedResumeData) {
+      dispatch(setSections(storedResumeData)); // load data from local storage for first render
+    }
+  }, []);
+  useEffect(() => {
+    if (allowDataLocalStorage) {
+      setStoredResumeData(resumeStore.sections); // sync data to local storage
+    }
+  }, [allowDataLocalStorage, resumeStore.sections, setStoredResumeData]);
+
   function handleOpenSectionEditor(component: () => JSX.Element) {
     dispatch(setIsEditingResume(true));
     dispatch(setSectionEditor(component));
+  }
+  function handleToggleDataStorageOption(e: CheckboxChangeEvent) {
+    if (e.target.checked) {
+      setStoredResumeData(resumeStore.sections);
+    } else {
+      window.localStorage.removeItem(RESUME_DATA_KEY);
+    }
+    setAllowDataLocalStorage(e.target.checked);
   }
 
   if (resumeStore.isEditingResume) {
@@ -43,13 +92,23 @@ export default function Sidebar({
           <RightOutlined className={styles["section-editor-link-icon"]} />
         </Button>
       ))}
-      <Divider>Download Resume</Divider>
-      <ActionButton
-        type="primary"
-        onClick={globalThis.print}
-      >
+      <Divider>Download</Divider>
+      <ActionButton type="primary" onClick={globalThis.print}>
         Download PDF
       </ActionButton>
+      <Divider>Settings</Divider>
+      <Typography.Title level={5}>Storage</Typography.Title>
+      <Typography.Paragraph>
+        By default, data is not persisted so it will reset to default on every
+        page refresh. By allowing storing data locally, the resume data will be
+        stored on your local browser.
+      </Typography.Paragraph>
+      <Checkbox
+        checked={allowDataLocalStorage}
+        onChange={handleToggleDataStorageOption}
+      >
+        Allow Data to be stored locally on the browser
+      </Checkbox>
     </aside>
   );
 }

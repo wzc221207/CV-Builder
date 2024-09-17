@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.2 (2024-09-18)
+
+Features
+- Support saving resume data on the local browser so that when the page refreshes, the resume data doesn't get reset to default
+
+Fixes
+- adjust preview styles
+
 ## 0.1.1 (2024-09-17)
 
 Fixes
