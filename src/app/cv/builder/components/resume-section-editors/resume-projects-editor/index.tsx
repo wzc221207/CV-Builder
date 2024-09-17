@@ -1,12 +1,12 @@
 import { useResumeEditing, useStoreProjects } from "@/app/cv/builder/hooks";
-import { Button, Card, Form, Input, message } from "antd";
+import { Card, Form, Input, message } from "antd";
 import { type ResumeProjects } from "@/store/resume-slice";
 import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import styles from "./index.module.scss";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
-import clsx from "clsx";
 import { useEffect, useState } from "react";
 import RichTextEditor from "../../rich-text-editor";
+import ActionButton from "../../action-button";
 
 export default function ResumeProjectsEditor() {
   const { storeGetProjects, storeSetProjects } = useStoreProjects();
@@ -80,15 +80,13 @@ export default function ResumeProjectsEditor() {
                   </Card>
                 ))}
                 <Form.Item>
-                  <Button
+                  <ActionButton
                     type="dashed"
-                    className={clsx([styles["button"], styles["add-button"]])}
                     onClick={() => add()}
-                    block
                     icon={<PlusOutlined />}
                   >
                     Add Project
-                  </Button>
+                  </ActionButton>
                 </Form.Item>
               </>
             )}
@@ -96,9 +94,9 @@ export default function ResumeProjectsEditor() {
         </Form>
       </div>
 
-      <Button type="primary" className={styles["button"]} onClick={handleSave}>
+      <ActionButton type="primary" onClick={handleSave}>
         Save
-      </Button>
+      </ActionButton>
     </ResumeSectionEditorLayout>
   );
 }

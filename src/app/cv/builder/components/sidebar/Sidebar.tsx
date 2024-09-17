@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import styles from "./sidebar.module.scss";
 import { setIsEditingResume, setSectionEditor } from "@/store/resume-slice";
 import { siteName } from "@/constants/meta";
+import ActionButton from "../action-button";
 
 export default function Sidebar({
   sections,
@@ -35,21 +36,20 @@ export default function Sidebar({
       {sections.map((section) => (
         <Button
           key={section.name}
-          className={styles["editor-section-button"]}
+          className={styles["section-editor-link-buton"]}
           onClick={() => handleOpenSectionEditor(section.component)}
         >
           <span>{section.name}</span>
-          <RightOutlined className={styles["editor-section-icon"]} />
+          <RightOutlined className={styles["section-editor-link-icon"]} />
         </Button>
       ))}
       <Divider>Download Resume</Divider>
-      <Button
+      <ActionButton
         type="primary"
-        className={styles["download-button"]}
         onClick={globalThis.print}
       >
         Download PDF
-      </Button>
+      </ActionButton>
     </aside>
   );
 }

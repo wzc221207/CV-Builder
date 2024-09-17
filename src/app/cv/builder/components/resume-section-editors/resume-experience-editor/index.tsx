@@ -1,13 +1,13 @@
 import { useResumeEditing, useStoreExperience } from "@/app/cv/builder/hooks";
 import { ResumeExperience } from "@/store/resume-slice";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Card, Col, DatePicker, Form, Input, message, Row } from "antd";
-import clsx from "clsx";
+import { Card, Col, DatePicker, Form, Input, message, Row } from "antd";
 import { useEffect, useState } from "react";
 
 import RichTextEditor from "../../rich-text-editor";
 import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import styles from "./index.module.scss";
+import ActionButton from "../../action-button";
 
 export default function ResumeExperienceEditor() {
   const { storeGetExperience, storeSetExperience } = useStoreExperience();
@@ -136,24 +136,22 @@ export default function ResumeExperienceEditor() {
                   </Card>
                 ))}
                 <Form.Item>
-                  <Button
+                  <ActionButton
                     type="dashed"
-                    className={clsx([styles["button"], styles["add-button"]])}
                     onClick={() => add()}
-                    block
                     icon={<PlusOutlined />}
                   >
                     Add Experience
-                  </Button>
+                  </ActionButton>
                 </Form.Item>
               </>
             )}
           </Form.List>
         </Form>
       </div>
-      <Button type="primary" className={styles["button"]} onClick={handleSave}>
+      <ActionButton type="primary" onClick={handleSave}>
         Save
-      </Button>
+      </ActionButton>
     </ResumeSectionEditorLayout>
   );
 }

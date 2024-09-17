@@ -10,24 +10,14 @@
         text-align: center;
     }
 
-    .download-button {
-        height: 50px;
-        width: 100%;
-        border-radius: 10px;
-    }
-
-    .editor-section-button {
+    .section-editor-link-buton {
         position: relative;
         height: 50px;
         width: 100%;
-        border-radius: 10px;
         margin-bottom: 20px;
         border: 1px solid #e5e7eb;
 
-        text-align: center;
-        line-height: 50px;
-
-        .editor-section-icon {
+        .section-editor-link-icon {
             position: absolute;
             right: 20px;
         }

@@ -1,9 +1,10 @@
 import { useResumeEditing, useStoreBasicInfo } from "@/app/cv/builder/hooks";
 import { ResumeBasicInfo } from "@/store/resume-slice";
-import { Button, Form, Input, message } from "antd";
+import { Form, Input, message } from "antd";
 
 import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import styles from "./index.module.scss";
+import ActionButton from "../../action-button";
 
 export default function ResumeBasicInfoEditor() {
   const { storeSetIsEditingResume } = useResumeEditing();
@@ -98,13 +99,9 @@ export default function ResumeBasicInfoEditor() {
           >
             <Input required />
           </Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className={styles["save-button"]}
-          >
+          <ActionButton type="primary" htmlType="submit">
             Save
-          </Button>
+          </ActionButton>
         </Form>
       </div>
     </ResumeSectionEditorLayout>

@@ -1,10 +1,11 @@
-import { Button, Form, Input, message } from "antd";
+import { Form, message } from "antd";
 import { useResumeEditing, useStoreSummary } from "@/app/cv/builder/hooks";
 
 import styles from "./index.module.scss";
 import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import { type ResumeSummary } from "@/store/resume-slice";
 import RichTextEditor from "../../rich-text-editor";
+import ActionButton from "../../action-button";
 
 export default function ResumeSummaryEditor() {
   const { storeSetIsEditingResume } = useResumeEditing();
@@ -47,13 +48,9 @@ export default function ResumeSummaryEditor() {
           >
             <RichTextEditor />
           </Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className={styles["save-button"]}
-          >
+          <ActionButton type="primary" htmlType="submit">
             Save
-          </Button>
+          </ActionButton>
         </Form>
       </div>
     </ResumeSectionEditorLayout>

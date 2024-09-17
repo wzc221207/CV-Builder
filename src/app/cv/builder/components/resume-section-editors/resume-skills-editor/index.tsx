@@ -1,11 +1,12 @@
 import { useResumeEditing, useStoreSkills } from "@/app/cv/builder/hooks";
-import { Button, message } from "antd";
+import { message, Space } from "antd";
 
 import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import { useSkills } from "./hooks";
 import styles from "./index.module.scss";
 import SkillGroupCard from "./SkillGroupCard";
 import { SkillsContext } from "./contexts";
+import ActionButton from "../../action-button";
 
 export default function ResumeSkillsEditor() {
   const { storeGetSkills, storeSetSkills } = useStoreSkills();
@@ -30,20 +31,14 @@ export default function ResumeSkillsEditor() {
             />
           ))}
         </div>
-        <Button
-          type="dashed"
-          className={styles["button"]}
-          onClick={ctx.handlers.handleAddNewGroup}
-        >
-          Add Skills Group
-        </Button>
-        <Button
-          type="primary"
-          className={styles["button"]}
-          onClick={handleSave}
-        >
-          Save
-        </Button>
+        <Space direction="vertical" size="large" style={{ width: "100%" }}>
+          <ActionButton type="dashed" onClick={ctx.handlers.handleAddNewGroup}>
+            Add Skills Group
+          </ActionButton>
+          <ActionButton type="primary" onClick={handleSave}>
+            Save
+          </ActionButton>
+        </Space>
       </SkillsContext.Provider>
     </ResumeSectionEditorLayout>
   );

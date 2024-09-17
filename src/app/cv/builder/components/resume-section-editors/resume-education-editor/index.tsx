@@ -1,12 +1,12 @@
 import { useResumeEditing, useStoreEducation } from "@/app/cv/builder/hooks";
 import { ResumeEducation } from "@/store/resume-slice";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Card, DatePicker, Form, Input, message } from "antd";
-import clsx from "clsx";
+import { Card, DatePicker, Form, Input, message } from "antd";
 import { useEffect, useState } from "react";
 
 import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import styles from "./index.module.scss";
+import ActionButton from "../../action-button";
 
 export default function ResumeEducationEditor() {
   const { storeGetEducation, storeSetEducation } = useStoreEducation();
@@ -106,15 +106,13 @@ export default function ResumeEducationEditor() {
                   </Card>
                 ))}
                 <Form.Item>
-                  <Button
+                  <ActionButton
                     type="dashed"
-                    className={clsx([styles["button"], styles["add-button"]])}
                     onClick={() => add()}
-                    block
                     icon={<PlusOutlined />}
                   >
                     Add Education
-                  </Button>
+                  </ActionButton>
                 </Form.Item>
               </>
             )}
@@ -122,9 +120,9 @@ export default function ResumeEducationEditor() {
         </Form>
       </div>
 
-      <Button type="primary" className={styles["button"]} onClick={handleSave}>
+      <ActionButton type="primary" onClick={handleSave}>
         Save
-      </Button>
+      </ActionButton>
     </ResumeSectionEditorLayout>
   );
 }

@@ -1,11 +1,11 @@
 import { useResumeEditing, useStoreLanguages } from "@/app/cv/builder/hooks";
-import { Button, Card, Form, Input, message } from "antd";
+import { Card, Form, Input, message } from "antd";
 import { type ResumeLanguages } from "@/store/resume-slice";
 import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import styles from "./index.module.scss";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
-import clsx from "clsx";
 import { useEffect, useState } from "react";
+import ActionButton from "../../action-button";
 
 export default function ResumeLanguagesEditor() {
   const { storeGetLanguages, storeSetLanguages } = useStoreLanguages();
@@ -79,15 +79,13 @@ export default function ResumeLanguagesEditor() {
                   </Card>
                 ))}
                 <Form.Item>
-                  <Button
+                  <ActionButton
                     type="dashed"
-                    className={clsx([styles["button"], styles["add-button"]])}
                     onClick={() => add()}
-                    block
                     icon={<PlusOutlined />}
                   >
                     Add Language
-                  </Button>
+                  </ActionButton>
                 </Form.Item>
               </>
             )}
@@ -95,9 +93,9 @@ export default function ResumeLanguagesEditor() {
         </Form>
       </div>
 
-      <Button type="primary" className={styles["button"]} onClick={handleSave}>
+      <ActionButton type="primary" onClick={handleSave}>
         Save
-      </Button>
+      </ActionButton>
     </ResumeSectionEditorLayout>
   );
 }
