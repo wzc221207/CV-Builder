@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4 (2024-09-30)
+
+Features
+- add home page with a hero section
+
 ## 0.1.3 (2024-09-18)
 
 Fixes

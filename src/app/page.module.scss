@@ -1,0 +1,40 @@
+.hero {
+  min-width: 100vw;
+  min-height: 100vh;
+  padding: 30px;
+
+  background-color: #f3f4f6;
+}
+
+.descrption {
+  width: 960px;
+  margin: auto;
+  font-size: 56px !important;
+
+  span {
+    background: linear-gradient(120deg, #1d4ed8 30%, #0ea5e9);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.actions {
+  width: 960px;
+  margin: 60px auto;
+
+  text-align: left;
+
+  .action-button {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 5px;
+
+    background-color: #111827;
+    color: white;
+    
+  }
+    .action-button:hover {
+      opacity: 0.7;
+      transition: all 0.5s;
+    }
+}

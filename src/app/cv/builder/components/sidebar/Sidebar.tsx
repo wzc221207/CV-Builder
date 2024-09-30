@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import ActionButton from "../action-button";
 import styles from "./sidebar.module.scss";
 import dayjs from "dayjs";
+import Link from "next/link";
 
 const ALLOW_LOCAL_DATA_STORAGE_KEY = "allow-local-data-storage";
 const RESUME_DATA_KEY = "resume-data";
@@ -78,9 +79,9 @@ export default function Sidebar({
   }
   return (
     <aside className={styles.sidebar}>
-      <Typography.Title level={2} className={styles.title}>
-        {siteName}
-      </Typography.Title>
+      <header className={styles.title}>
+        <Link href="/">{siteName}</Link>
+      </header>
       <Divider>Resume Sections</Divider>
       {sections.map((section) => (
         <Button
