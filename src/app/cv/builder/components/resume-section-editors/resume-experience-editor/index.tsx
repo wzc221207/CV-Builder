@@ -8,6 +8,7 @@ import RichTextEditor from "../../rich-text-editor";
 import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import styles from "./index.module.scss";
 import ActionButton from "../../action-button";
+import SectionVisibilityToggler from "../resume-visibility-toggler";
 
 export default function ResumeExperienceEditor() {
   const { storeGetExperience, storeSetExperience } = useStoreExperience();
@@ -33,6 +34,8 @@ export default function ResumeExperienceEditor() {
 
   return (
     <ResumeSectionEditorLayout title="Experience">
+      <SectionVisibilityToggler sectionName="experience" />
+
       <div className={styles.experience}>
         <Form form={form} layout="vertical">
           <Form.List name="items">

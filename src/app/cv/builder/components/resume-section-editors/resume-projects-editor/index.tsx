@@ -7,6 +7,7 @@ import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import RichTextEditor from "../../rich-text-editor";
 import ActionButton from "../../action-button";
+import SectionVisibilityToggler from "../resume-visibility-toggler";
 
 export default function ResumeProjectsEditor() {
   const { storeGetProjects, storeSetProjects } = useStoreProjects();
@@ -32,6 +33,7 @@ export default function ResumeProjectsEditor() {
 
   return (
     <ResumeSectionEditorLayout title="Projects">
+      <SectionVisibilityToggler sectionName="projects" />
       <div className={styles.projects}>
         <Form form={form} layout="vertical">
           <Form.List name="items">

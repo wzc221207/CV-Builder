@@ -7,6 +7,7 @@ import styles from "./index.module.scss";
 import SkillGroupCard from "./SkillGroupCard";
 import { SkillsContext } from "./contexts";
 import ActionButton from "../../action-button";
+import SectionVisibilityToggler from "../resume-visibility-toggler";
 
 export default function ResumeSkillsEditor() {
   const { storeGetSkills, storeSetSkills } = useStoreSkills();
@@ -21,6 +22,7 @@ export default function ResumeSkillsEditor() {
 
   return (
     <ResumeSectionEditorLayout title="Skills">
+      <SectionVisibilityToggler sectionName="skills" />
       <SkillsContext.Provider value={ctx}>
         <div className={styles.skills}>
           {ctx.states.skills.map((group, groupIdx) => (

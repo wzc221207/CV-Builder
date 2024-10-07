@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.5 (2024-10-07)
+
+Features
+- Make section visibility toggleable
+
+Fixes
+- adjust home page title size
+
 ## 0.1.4 (2024-09-30)
 
 Features

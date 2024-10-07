@@ -5,6 +5,15 @@ import dayjs from "dayjs";
 export const defaultResumeState: ResumeState = {
   isEditingResume: false,
   sectionEditor: () => <></>,
+  activeSections: [
+    "basicInfo",
+    "summary",
+    "skills",
+    "experience",
+    "projects",
+    "education",
+    "languages",
+  ],
   sections: {
     basicInfo: {
       name: "Ethan Wilder",

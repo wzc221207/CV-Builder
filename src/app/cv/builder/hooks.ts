@@ -14,6 +14,8 @@ import {
   ResumeLanguages,
   setSectionProjects,
   setSectionLanguages,
+  SectionName,
+  setActiveSections,
 } from "@/store/resume-slice";
 
 import { useAppDispatch, useAppSelector } from "@/store";
@@ -87,4 +89,12 @@ export function useResumeEditing() {
   const storeSetIsEditingResume = (editing: boolean) =>
     dispatch(setIsEditingResume(editing));
   return { storeGetIsEditingResume, storeSetIsEditingResume };
+}
+
+export function useActiveSections() {
+  const { resumeStore, dispatch } = useResumeStore();
+  const storeGetActiveSections = () => resumeStore.activeSections;
+  const storeSetActiveSections = (actoveSections: SectionName[]) =>
+    dispatch(setActiveSections(actoveSections));
+  return { storeGetActiveSections, storeSetActiveSections };
 }

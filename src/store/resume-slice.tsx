@@ -5,6 +5,15 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 
 dayjs.extend(customParseFormat);
 
+export type SectionName =
+  | "basicInfo"
+  | "summary"
+  | "skills"
+  | "experience"
+  | "projects"
+  | "education"
+  | "languages";
+
 export interface ResumeBasicInfo {
   name: string;
   jobTitle: string;
@@ -72,6 +81,7 @@ export interface ResumeState {
   isEditingResume: boolean;
   sectionEditor: () => JSX.Element;
   sections: ResumeSections;
+  activeSections: SectionName[];
 }
 
 const initialState: ResumeState = defaultResumeState;
@@ -110,6 +120,9 @@ const userSlice = createSlice({
     setSections(state, action: PayloadAction<ResumeSections>) {
       state.sections = action.payload;
     },
+    setActiveSections(state, action: PayloadAction<SectionName[]>) {
+      state.activeSections = action.payload;
+    },
   },
 });
 
@@ -123,6 +136,7 @@ export const {
   setSectionEducation,
   setSectionProjects,
   setSectionLanguages,
-  setSections
+  setSections,
+  setActiveSections,
 } = userSlice.actions;
 export default userSlice.reducer;

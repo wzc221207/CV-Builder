@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import styles from "./index.module.scss";
 import ActionButton from "../../action-button";
+import SectionVisibilityToggler from "../resume-visibility-toggler";
 
 export default function ResumeEducationEditor() {
   const { storeGetEducation, storeSetEducation } = useStoreEducation();
@@ -32,6 +33,8 @@ export default function ResumeEducationEditor() {
 
   return (
     <ResumeSectionEditorLayout title="Education">
+      <SectionVisibilityToggler sectionName="education" />
+
       <div className={styles.education}>
         <Form form={form} layout="vertical">
           <Form.List name="items">

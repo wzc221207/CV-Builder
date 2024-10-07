@@ -6,6 +6,7 @@ import styles from "./index.module.scss";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import ActionButton from "../../action-button";
+import SectionVisibilityToggler from "../resume-visibility-toggler";
 
 export default function ResumeLanguagesEditor() {
   const { storeGetLanguages, storeSetLanguages } = useStoreLanguages();
@@ -31,6 +32,8 @@ export default function ResumeLanguagesEditor() {
 
   return (
     <ResumeSectionEditorLayout title="Languages">
+      <SectionVisibilityToggler sectionName="languages" />
+
       <div className={styles.languages}>
         <Form form={form} layout="vertical">
           <Form.List name="items">

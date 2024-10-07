@@ -6,10 +6,12 @@ import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import { type ResumeSummary } from "@/store/resume-slice";
 import RichTextEditor from "../../rich-text-editor";
 import ActionButton from "../../action-button";
+import SectionVisibilityToggler from "../resume-visibility-toggler";
 
 export default function ResumeSummaryEditor() {
   const { storeSetIsEditingResume } = useResumeEditing();
   const { storeGetSummary, storeSetSummary } = useStoreSummary();
+
   const [form] = Form.useForm<ResumeSummary>();
   form.setFieldsValue(storeGetSummary());
 
@@ -28,6 +30,7 @@ export default function ResumeSummaryEditor() {
 
   return (
     <ResumeSectionEditorLayout title="Summary">
+      <SectionVisibilityToggler sectionName="summary" />
       <div className={styles["form-container"]}>
         <Form
           form={form}
