@@ -1,7 +1,13 @@
+import { SectionName } from "@/store/resume-slice";
 import { Checkbox } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
-import { useActiveSections } from "../../../hooks";
-import { SectionName } from "@/store/resume-slice";
+import { useEffect } from "react";
+
+import {
+  useActiveSections,
+  useAllowLocalStorage,
+  useLocalActiveSections,
+} from "../../../hooks";
 import styles from "./index.module.scss";
 
 export default function SectionVisibilityToggler({
@@ -12,6 +18,14 @@ export default function SectionVisibilityToggler({
   const { storeGetActiveSections, storeSetActiveSections } =
     useActiveSections();
   const activeSectionNames = storeGetActiveSections();
+  const [_, setLocalActiveSections] = useLocalActiveSections();
+  const [allowDataLocalStorage] = useAllowLocalStorage();
+
+  useEffect(() => {
+    if (allowDataLocalStorage) {
+      setLocalActiveSections(activeSectionNames); // sync data to local storage
+    }
+  }, [allowDataLocalStorage, activeSectionNames, setLocalActiveSections]);
 
   function toggleSectionVisibility(e: CheckboxChangeEvent) {
     if (e.target.checked) {

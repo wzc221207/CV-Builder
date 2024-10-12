@@ -1,24 +1,33 @@
+import { useAppDispatch, useAppSelector } from "@/store";
 import {
   ResumeBasicInfo,
+  ResumeEducation,
   ResumeExperience,
+  ResumeLanguages,
+  ResumeProjects,
+  ResumeSections,
   ResumeSkills,
   ResumeSummary,
-  setIsEditingResume,
-  setSectionBasicInfo,
-  setSectionSkills,
-  setSectionSummary,
-  setSectionExperience,
-  ResumeEducation,
-  setSectionEducation,
-  ResumeProjects,
-  ResumeLanguages,
-  setSectionProjects,
-  setSectionLanguages,
   SectionName,
   setActiveSections,
+  setIsEditingResume,
+  setSectionBasicInfo,
+  setSectionEducation,
+  setSectionExperience,
+  setSectionLanguages,
+  setSectionProjects,
+  setSectionSkills,
+  setSectionSummary,
 } from "@/store/resume-slice";
+import { useLocalStorageState } from "ahooks";
+import dayjs from "dayjs";
+import {
+  ALLOW_LOCAL_DATA_STORAGE_KEY,
+  RESUME_DATA_KEY,
+  VISIBLE_SECTIONS_KEY,
+} from "./constants";
 
-import { useAppDispatch, useAppSelector } from "@/store";
+// Redux Store Hooks
 
 export function useResumeStore() {
   const resumeStore = useAppSelector((state) => state.resume);
@@ -97,4 +106,33 @@ export function useActiveSections() {
   const storeSetActiveSections = (actoveSections: SectionName[]) =>
     dispatch(setActiveSections(actoveSections));
   return { storeGetActiveSections, storeSetActiveSections };
+}
+
+// Local Storage Hooks
+
+export function useAllowLocalStorage() {
+  return useLocalStorageState(ALLOW_LOCAL_DATA_STORAGE_KEY, {
+    defaultValue: false,
+  });
+}
+
+export function useLocalActiveSections() {
+  return useLocalStorageState<SectionName[] | null>(VISIBLE_SECTIONS_KEY, {
+    defaultValue: null,
+  });
+}
+
+export function useLocalResumeData() {
+  return useLocalStorageState<ResumeSections | undefined>(RESUME_DATA_KEY, {
+    defaultValue: undefined,
+    deserializer: (val) => {
+      return JSON.parse(val, (k, v) => {
+        const dateFields = ["startDate", "endDate", "graduationDate"];
+        if (dateFields.includes(k)) {
+          return dayjs(v);
+        }
+        return v;
+      });
+    },
+  });
 }

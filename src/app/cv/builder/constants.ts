@@ -38,3 +38,8 @@ export const sectionEditors = [
 ];
 
 export const dateFormat = "MM/YYYY";
+
+// Local Storage Keys
+export const ALLOW_LOCAL_DATA_STORAGE_KEY = "allow-local-data-storage";
+export const RESUME_DATA_KEY = "resume-data";
+export const VISIBLE_SECTIONS_KEY = "active-sections";

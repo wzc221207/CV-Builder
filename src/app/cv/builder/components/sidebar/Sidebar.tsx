@@ -1,75 +1,68 @@
 import { siteName } from "@/constants/meta";
-import { useAppDispatch, useAppSelector } from "@/store";
 import {
-  ResumeSections,
   setIsEditingResume,
   setSectionEditor,
   setSections,
 } from "@/store/resume-slice";
 import { RightOutlined } from "@ant-design/icons";
-import { useLocalStorageState } from "ahooks";
-import { Button, Checkbox, Divider, Typography } from "antd";
-import { CheckboxChangeEvent } from "antd/es/checkbox";
+import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
 import { useEffect } from "react";
 
+import {
+  useActiveSections,
+  useAllowLocalStorage,
+  useLocalActiveSections,
+  useLocalResumeData,
+  useResumeEditing,
+  useResumeStore,
+} from "../../hooks";
 import ActionButton from "../action-button";
 import styles from "./sidebar.module.scss";
-import dayjs from "dayjs";
+import { RESUME_DATA_KEY, VISIBLE_SECTIONS_KEY } from "../../constants";
 import Link from "next/link";
-
-const ALLOW_LOCAL_DATA_STORAGE_KEY = "allow-local-data-storage";
-const RESUME_DATA_KEY = "resume-data";
+import { Button, Divider, Typography } from "antd";
 
 export default function Sidebar({
   sections,
 }: {
   sections: { name: string; component: () => JSX.Element }[];
 }) {
-  const resumeStore = useAppSelector((state) => state.resume);
-  const dispatch = useAppDispatch();
+  const { resumeStore, dispatch } = useResumeStore();
+  const { storeGetIsEditingResume } = useResumeEditing();
+  const isEditingResume = storeGetIsEditingResume();
+  const { storeSetActiveSections } = useActiveSections();
+  const [localActiveSections] = useLocalActiveSections();
   const [allowDataLocalStorage, setAllowDataLocalStorage] =
-    useLocalStorageState(ALLOW_LOCAL_DATA_STORAGE_KEY, {
-      defaultValue: false,
-    });
-  const [storedResumeData, setStoredResumeData] = useLocalStorageState<
-    ResumeSections | undefined
-  >(RESUME_DATA_KEY, {
-    defaultValue: undefined,
-    deserializer: (val) => {
-      return JSON.parse(val, (k, v) => {
-        const dateFields = ["startDate", "endDate", "graduationDate"];
-        if (dateFields.includes(k)) {
-          return dayjs(v);
-        }
-        return v;
-      });
-    },
-  });
+    useAllowLocalStorage();
+  const [localResumeData, setLocalResumeData] = useLocalResumeData();
   useEffect(() => {
-    if (allowDataLocalStorage && storedResumeData) {
-      dispatch(setSections(storedResumeData)); // load data from local storage for first render
+    // load data from local storage for first render
+    if (allowDataLocalStorage && localActiveSections) {
+      storeSetActiveSections(localActiveSections);
+    }
+    if (allowDataLocalStorage && localResumeData) {
+      dispatch(setSections(localResumeData));
     }
   }, []);
   useEffect(() => {
     if (allowDataLocalStorage) {
-      setStoredResumeData(resumeStore.sections); // sync data to local storage
+      setLocalResumeData(resumeStore.sections); // sync data to local storage
     }
-  }, [allowDataLocalStorage, resumeStore.sections, setStoredResumeData]);
+  }, [allowDataLocalStorage, resumeStore.sections, setLocalResumeData]);
 
   function handleOpenSectionEditor(component: () => JSX.Element) {
     dispatch(setIsEditingResume(true));
     dispatch(setSectionEditor(component));
   }
   function handleToggleDataStorageOption(e: CheckboxChangeEvent) {
-    if (e.target.checked) {
-      setStoredResumeData(resumeStore.sections);
-    } else {
+    if (!e.target.checked) {
       window.localStorage.removeItem(RESUME_DATA_KEY);
+      window.localStorage.removeItem(VISIBLE_SECTIONS_KEY);
     }
     setAllowDataLocalStorage(e.target.checked);
   }
 
-  if (resumeStore.isEditingResume) {
+  if (isEditingResume) {
     const SectionEditor = resumeStore.sectionEditor;
     return (
       <aside className={styles.sidebar}>
