@@ -1,4 +1,4 @@
-name: Lint
+name: Build-Lint
 
 on:
   push:
@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  lint:
-    name: lint
+  build-lint:
+    name: build-lint
     runs-on: ubuntu-latest
 
     steps:
@@ -19,6 +19,9 @@ jobs:
 
       - name: Install packages
         run: npm ci
+
+      - name: Build
+        run: npx turbo build
         
       - name: Run lint
-        run: npm run lint
+        run: npx turbo lint

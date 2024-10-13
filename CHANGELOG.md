@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.6 (2024-10-13)
+
+Refactor
+- adopt monorepo project structure
+
 ## 0.1.5 (2024-10-07)
 
 Features
