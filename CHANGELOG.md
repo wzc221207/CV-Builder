@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.7 (2024-10-16)
+
+Features
+- Add language selector and basic internationalization support (chinese)
+
 ## 0.1.6 (2024-10-13)
 
 Refactor

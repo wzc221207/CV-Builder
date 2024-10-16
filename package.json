@@ -1,6 +1,6 @@
 {
   "name": "cv-builder",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "CV Builder is a free and open-source tool to create professional resumes online.",
   "packageManager": "npm@10.9.0",
   "workspaces": [
@@ -13,5 +13,9 @@
   },
   "devDependencies": {
     "turbo": "^2.1.3"
+  },
+  "dependencies": {
+    "i18next": "^23.16.0",
+    "react-i18next": "^15.0.3"
   }
 }

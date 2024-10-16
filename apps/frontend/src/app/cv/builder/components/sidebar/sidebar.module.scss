@@ -5,12 +5,26 @@
     overflow-y: auto;
     background-color: #f9fafb;
 
-    .title {
+    .header {
         margin-bottom: 20px;
 
-        text-align: center;
-        font-size: 28px;
-        font-weight: bold;
+        .row {
+            margin-bottom: 10px;
+        }
+
+        .col {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .language-selector {
+            width: 100px;
+        }
     }
 
     .section-editor-link-buton {

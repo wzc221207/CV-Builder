@@ -5,9 +5,14 @@ import {
   setSections,
 } from "@/store/resume-slice";
 import { RightOutlined } from "@ant-design/icons";
+import { Button, Col, Divider, Row, Select, Typography } from "antd";
 import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
+import Link from "next/link";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 
+import { RESUME_DATA_KEY, VISIBLE_SECTIONS_KEY } from "../../constants";
 import {
   useActiveSections,
   useAllowLocalStorage,
@@ -18,9 +23,6 @@ import {
 } from "../../hooks";
 import ActionButton from "../action-button";
 import styles from "./sidebar.module.scss";
-import { RESUME_DATA_KEY, VISIBLE_SECTIONS_KEY } from "../../constants";
-import Link from "next/link";
-import { Button, Divider, Typography } from "antd";
 
 export default function Sidebar({
   sections,
@@ -35,6 +37,8 @@ export default function Sidebar({
   const [allowDataLocalStorage, setAllowDataLocalStorage] =
     useAllowLocalStorage();
   const [localResumeData, setLocalResumeData] = useLocalResumeData();
+  const { t } = useTranslation();
+
   useEffect(() => {
     // load data from local storage for first render
     if (allowDataLocalStorage && localActiveSections) {
@@ -72,36 +76,54 @@ export default function Sidebar({
   }
   return (
     <aside className={styles.sidebar}>
-      <header className={styles.title}>
-        <Link href="/">{siteName}</Link>
+      <header className={styles.header}>
+        <Row className={styles.row}>
+          <Col span={24} className={styles.col}>
+            <Link href="/" className={styles.title}>
+              {siteName}
+            </Link>
+          </Col>
+        </Row>
+        <Row className={styles.row}>
+          <Col span={24} className={styles.col}>
+            <Select
+              defaultValue="en"
+              value={i18n.language}
+              options={[
+                { value: "en", label: <span>English</span> },
+                { value: "zh", label: <span>中文</span> },
+              ]}
+              className={styles["language-selector"]}
+              onChange={(value) => {
+                i18n.changeLanguage(value);
+              }}
+            />
+          </Col>
+        </Row>
       </header>
-      <Divider>Resume Sections</Divider>
+      <Divider>{t("Resume Sections")}</Divider>
       {sections.map((section) => (
         <Button
           key={section.name}
           className={styles["section-editor-link-buton"]}
           onClick={() => handleOpenSectionEditor(section.component)}
         >
-          <span>{section.name}</span>
+          <span>{t(section.name)}</span>
           <RightOutlined className={styles["section-editor-link-icon"]} />
         </Button>
       ))}
-      <Divider>Download</Divider>
+      <Divider>{t("Download")}</Divider>
       <ActionButton type="primary" onClick={globalThis.print}>
-        Download PDF
+        {t("Download PDF")}
       </ActionButton>
-      <Divider>Settings</Divider>
-      <Typography.Title level={5}>Storage</Typography.Title>
-      <Typography.Paragraph>
-        By default, data is not persisted so it will reset to default on every
-        page refresh. By allowing storing data locally, the resume data will be
-        stored on your local browser.
-      </Typography.Paragraph>
+      <Divider>{t("Settings")}</Divider>
+      <Typography.Title level={5}>{t("Storage")}</Typography.Title>
+      <Typography.Paragraph>{t("Storage Prompt")}</Typography.Paragraph>
       <Checkbox
         checked={allowDataLocalStorage}
         onChange={handleToggleDataStorageOption}
       >
-        Allow Data to be stored locally on the browser
+        {t("Allow Local Storage")}
       </Checkbox>
     </aside>
   );
