@@ -8,12 +8,15 @@ import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import styles from "./index.module.scss";
 import ActionButton from "../../action-button";
 import SectionVisibilityToggler from "../resume-visibility-toggler";
+import { useTranslation } from "react-i18next";
 
 export default function ResumeEducationEditor() {
   const { storeGetEducation, storeSetEducation } = useStoreEducation();
   const { storeSetIsEditingResume } = useResumeEditing();
   const [form] = Form.useForm<{ items: ResumeEducation }>();
   const [education] = useState<ResumeEducation>(storeGetEducation());
+  const { t } = useTranslation();
+
   useEffect(() => {
     form.setFieldsValue({ items: education });
   }, [education, form]);
@@ -32,7 +35,7 @@ export default function ResumeEducationEditor() {
   }
 
   return (
-    <ResumeSectionEditorLayout title="Education">
+    <ResumeSectionEditorLayout title={t("Education")}>
       <SectionVisibilityToggler sectionName="education" />
 
       <div className={styles.education}>
@@ -44,7 +47,7 @@ export default function ResumeEducationEditor() {
                   <Card
                     className={styles.card}
                     size="small"
-                    title={`Education ${idx + 1}`}
+                    title={`${t("Education")} ${idx + 1}`}
                     key={key}
                     extra={
                       <CloseOutlined
@@ -57,7 +60,7 @@ export default function ResumeEducationEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "name"]}
-                      label="University"
+                      label={t("University")}
                       rules={[
                         {
                           required: true,
@@ -70,7 +73,7 @@ export default function ResumeEducationEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "major"]}
-                      label="Major"
+                      label={t("Major")}
                       rules={[
                         {
                           required: true,
@@ -83,7 +86,7 @@ export default function ResumeEducationEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "graduationDate"]}
-                      label="Graduation Date"
+                      label={t("Graduation Date")}
                       rules={[
                         {
                           required: true,
@@ -96,7 +99,7 @@ export default function ResumeEducationEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "location"]}
-                      label="Location"
+                      label={t("Location")}
                       rules={[
                         {
                           required: true,
@@ -114,7 +117,7 @@ export default function ResumeEducationEditor() {
                     onClick={() => add()}
                     icon={<PlusOutlined />}
                   >
-                    Add Education
+                    {t("Add Education")}
                   </ActionButton>
                 </Form.Item>
               </>
@@ -124,7 +127,7 @@ export default function ResumeEducationEditor() {
       </div>
 
       <ActionButton type="primary" onClick={handleSave}>
-        Save
+        {t("Save")}
       </ActionButton>
     </ResumeSectionEditorLayout>
   );

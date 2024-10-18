@@ -1,21 +1,20 @@
-import type { Metadata } from "next";
+"use client";
 import { Inter } from "next/font/google";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import "@/i18n";
+
+import { siteName } from "@/constants/meta";
 import "./globals.css";
-import { siteName, siteDescription } from "@/constants/meta";
+import { useTitle } from "ahooks";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: siteName,
-  description: siteDescription,
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useTitle(siteName);
   return (
     <html lang="en">
       <body className={inter.className}>

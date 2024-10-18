@@ -8,12 +8,15 @@ import { useEffect, useState } from "react";
 import RichTextEditor from "../../rich-text-editor";
 import ActionButton from "../../action-button";
 import SectionVisibilityToggler from "../resume-visibility-toggler";
+import { useTranslation } from "react-i18next";
 
 export default function ResumeProjectsEditor() {
   const { storeGetProjects, storeSetProjects } = useStoreProjects();
   const { storeSetIsEditingResume } = useResumeEditing();
   const [form] = Form.useForm<{ items: ResumeProjects }>();
   const [projects] = useState<ResumeProjects>(storeGetProjects());
+  const { t } = useTranslation();
+
   useEffect(() => {
     form.setFieldsValue({ items: projects });
   }, [projects, form]);
@@ -32,7 +35,7 @@ export default function ResumeProjectsEditor() {
   }
 
   return (
-    <ResumeSectionEditorLayout title="Projects">
+    <ResumeSectionEditorLayout title={t("Projects")}>
       <SectionVisibilityToggler sectionName="projects" />
       <div className={styles.projects}>
         <Form form={form} layout="vertical">
@@ -43,7 +46,7 @@ export default function ResumeProjectsEditor() {
                   <Card
                     className={styles.card}
                     size="small"
-                    title={`Project ${idx + 1}`}
+                    title={`${t("Project")} ${idx + 1}`}
                     key={key}
                     extra={
                       <CloseOutlined
@@ -56,7 +59,7 @@ export default function ResumeProjectsEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "title"]}
-                      label="Title"
+                      label={t("Title")}
                       rules={[
                         {
                           required: true,
@@ -69,7 +72,7 @@ export default function ResumeProjectsEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "description"]}
-                      label="Description"
+                      label={t("Description")}
                       rules={[
                         {
                           required: true,
@@ -87,7 +90,7 @@ export default function ResumeProjectsEditor() {
                     onClick={() => add()}
                     icon={<PlusOutlined />}
                   >
-                    Add Project
+                    {t("Add Project")}
                   </ActionButton>
                 </Form.Item>
               </>
@@ -97,7 +100,7 @@ export default function ResumeProjectsEditor() {
       </div>
 
       <ActionButton type="primary" onClick={handleSave}>
-        Save
+        {t("Save")}
       </ActionButton>
     </ResumeSectionEditorLayout>
   );

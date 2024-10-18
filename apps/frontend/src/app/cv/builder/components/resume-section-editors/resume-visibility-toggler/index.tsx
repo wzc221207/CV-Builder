@@ -9,6 +9,7 @@ import {
   useLocalActiveSections,
 } from "../../../hooks";
 import styles from "./index.module.scss";
+import { useTranslation } from "react-i18next";
 
 export default function SectionVisibilityToggler({
   sectionName,
@@ -20,6 +21,7 @@ export default function SectionVisibilityToggler({
   const activeSectionNames = storeGetActiveSections();
   const [_, setLocalActiveSections] = useLocalActiveSections();
   const [allowDataLocalStorage] = useAllowLocalStorage();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (allowDataLocalStorage) {
@@ -45,7 +47,7 @@ export default function SectionVisibilityToggler({
       onChange={toggleSectionVisibility}
       className={styles.checkbox}
     >
-      Show This Section in Resume
+      {t("Show This Section in Resume")}
     </Checkbox>
   );
 }

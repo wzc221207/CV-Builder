@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.8 (2024-10-19)
+
+Fix
+- add more translations
+
 ## 0.1.7 (2024-10-16)
 
 Features

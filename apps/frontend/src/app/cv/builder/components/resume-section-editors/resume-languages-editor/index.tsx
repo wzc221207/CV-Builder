@@ -7,12 +7,15 @@ import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import ActionButton from "../../action-button";
 import SectionVisibilityToggler from "../resume-visibility-toggler";
+import { useTranslation } from "react-i18next";
 
 export default function ResumeLanguagesEditor() {
   const { storeGetLanguages, storeSetLanguages } = useStoreLanguages();
   const { storeSetIsEditingResume } = useResumeEditing();
   const [form] = Form.useForm<{ items: ResumeLanguages }>();
   const [languages] = useState<ResumeLanguages>(storeGetLanguages());
+  const { t } = useTranslation();
+
   useEffect(() => {
     form.setFieldsValue({ items: languages });
   }, [languages, form]);
@@ -31,7 +34,7 @@ export default function ResumeLanguagesEditor() {
   }
 
   return (
-    <ResumeSectionEditorLayout title="Languages">
+    <ResumeSectionEditorLayout title={t("Languages")}>
       <SectionVisibilityToggler sectionName="languages" />
 
       <div className={styles.languages}>
@@ -43,7 +46,7 @@ export default function ResumeLanguagesEditor() {
                   <Card
                     className={styles.card}
                     size="small"
-                    title={`language ${idx + 1}`}
+                    title={`${t("Language")} ${idx + 1}`}
                     key={key}
                     extra={
                       <CloseOutlined
@@ -56,7 +59,7 @@ export default function ResumeLanguagesEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "name"]}
-                      label="name"
+                      label={t("Language Name")}
                       rules={[
                         {
                           required: true,
@@ -69,7 +72,7 @@ export default function ResumeLanguagesEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "level"]}
-                      label="Level"
+                      label={t("Level")}
                       rules={[
                         {
                           required: true,
@@ -87,7 +90,7 @@ export default function ResumeLanguagesEditor() {
                     onClick={() => add()}
                     icon={<PlusOutlined />}
                   >
-                    Add Language
+                    {t("Add Language")}
                   </ActionButton>
                 </Form.Item>
               </>
@@ -97,7 +100,7 @@ export default function ResumeLanguagesEditor() {
       </div>
 
       <ActionButton type="primary" onClick={handleSave}>
-        Save
+        {t("Save")}
       </ActionButton>
     </ResumeSectionEditorLayout>
   );

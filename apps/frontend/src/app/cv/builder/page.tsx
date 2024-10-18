@@ -2,7 +2,6 @@
 
 import { Provider as ReduxProvider } from "react-redux";
 import store from "@/store";
-import "@/i18n";
 import styles from "./page.module.scss";
 import { sectionEditors } from "./constants";
 import dynamic from "next/dynamic";

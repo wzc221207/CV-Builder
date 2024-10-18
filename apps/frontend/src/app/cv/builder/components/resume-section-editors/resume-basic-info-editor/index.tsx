@@ -5,11 +5,14 @@ import { Form, Input, message } from "antd";
 import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import styles from "./index.module.scss";
 import ActionButton from "../../action-button";
+import { useTranslation } from "react-i18next";
 
 export default function ResumeBasicInfoEditor() {
   const { storeSetIsEditingResume } = useResumeEditing();
   const { storeGetBasicInfo, storeSetBasicInfo } = useStoreBasicInfo();
   const [form] = Form.useForm<ResumeBasicInfo>();
+  const { t } = useTranslation();
+
   form.setFieldsValue(storeGetBasicInfo());
 
   function handleSave() {
@@ -26,7 +29,7 @@ export default function ResumeBasicInfoEditor() {
   }
 
   return (
-    <ResumeSectionEditorLayout title="Basic Information">
+    <ResumeSectionEditorLayout title={t("Basic Information")}>
       <div className={styles["form-container"]}>
         <Form
           form={form}
@@ -37,7 +40,7 @@ export default function ResumeBasicInfoEditor() {
         >
           <Form.Item
             name="name"
-            label="Name"
+            label={t("Name")}
             rules={[
               {
                 required: true,
@@ -49,7 +52,7 @@ export default function ResumeBasicInfoEditor() {
           </Form.Item>
           <Form.Item
             name="jobTitle"
-            label="Job Title"
+            label={t("Job Title")}
             rules={[
               {
                 required: true,
@@ -61,7 +64,7 @@ export default function ResumeBasicInfoEditor() {
           </Form.Item>
           <Form.Item
             name="email"
-            label="Email"
+            label={t("Email")}
             rules={[
               {
                 type: "email",
@@ -77,7 +80,7 @@ export default function ResumeBasicInfoEditor() {
           </Form.Item>
           <Form.Item
             name="phone"
-            label="Phone"
+            label={t("Phone")}
             rules={[
               {
                 required: true,
@@ -89,7 +92,7 @@ export default function ResumeBasicInfoEditor() {
           </Form.Item>
           <Form.Item
             name="location"
-            label="Location"
+            label={t("Location")}
             rules={[
               {
                 required: true,
@@ -100,7 +103,7 @@ export default function ResumeBasicInfoEditor() {
             <Input required />
           </Form.Item>
           <ActionButton type="primary" htmlType="submit">
-            Save
+            {t("Save")}
           </ActionButton>
         </Form>
       </div>

@@ -9,12 +9,15 @@ import ResumeSectionEditorLayout from "../resume-section-editor-layout";
 import styles from "./index.module.scss";
 import ActionButton from "../../action-button";
 import SectionVisibilityToggler from "../resume-visibility-toggler";
+import { useTranslation } from "react-i18next";
 
 export default function ResumeExperienceEditor() {
   const { storeGetExperience, storeSetExperience } = useStoreExperience();
   const { storeSetIsEditingResume } = useResumeEditing();
   const [form] = Form.useForm<{ items: ResumeExperience }>();
   const [experience] = useState<ResumeExperience>(storeGetExperience());
+  const { t } = useTranslation();
+
   useEffect(() => {
     form.setFieldsValue({ items: experience });
   }, [experience, form]);
@@ -33,7 +36,7 @@ export default function ResumeExperienceEditor() {
   }
 
   return (
-    <ResumeSectionEditorLayout title="Experience">
+    <ResumeSectionEditorLayout title={t("Experience")}>
       <SectionVisibilityToggler sectionName="experience" />
 
       <div className={styles.experience}>
@@ -45,7 +48,7 @@ export default function ResumeExperienceEditor() {
                   <Card
                     className={styles.card}
                     size="small"
-                    title={`Experience ${idx + 1}`}
+                    title={`${t("Experience")} ${idx + 1}`}
                     key={key}
                     extra={
                       <CloseOutlined
@@ -58,7 +61,7 @@ export default function ResumeExperienceEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "jobTitle"]}
-                      label="Job Title"
+                      label={t("Job Title")}
                       rules={[
                         { required: true, message: "Please input job title" },
                       ]}
@@ -68,7 +71,7 @@ export default function ResumeExperienceEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "company"]}
-                      label="Company Name"
+                      label={t("Company Name")}
                       rules={[
                         {
                           required: true,
@@ -83,7 +86,7 @@ export default function ResumeExperienceEditor() {
                         <Form.Item
                           {...restField}
                           name={[name, "startDate"]}
-                          label="Start Date"
+                          label={t("Start Date")}
                           rules={[
                             {
                               required: true,
@@ -98,7 +101,7 @@ export default function ResumeExperienceEditor() {
                         <Form.Item
                           {...restField}
                           name={[name, "endDate"]}
-                          label="End Date"
+                          label={t("End Date")}
                           rules={[
                             {
                               required: true,
@@ -113,7 +116,7 @@ export default function ResumeExperienceEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "location"]}
-                      label="Location"
+                      label={t("Location")}
                       rules={[
                         {
                           required: true,
@@ -126,7 +129,7 @@ export default function ResumeExperienceEditor() {
                     <Form.Item
                       {...restField}
                       name={[name, "description"]}
-                      label="Description"
+                      label={t("Description")}
                       rules={[
                         {
                           required: true,
@@ -144,7 +147,7 @@ export default function ResumeExperienceEditor() {
                     onClick={() => add()}
                     icon={<PlusOutlined />}
                   >
-                    Add Experience
+                    {t("Add Experience")}
                   </ActionButton>
                 </Form.Item>
               </>
@@ -153,7 +156,7 @@ export default function ResumeExperienceEditor() {
         </Form>
       </div>
       <ActionButton type="primary" onClick={handleSave}>
-        Save
+        {t("Save")}
       </ActionButton>
     </ResumeSectionEditorLayout>
   );

@@ -7,12 +7,14 @@ import { type ResumeSummary } from "@/store/resume-slice";
 import RichTextEditor from "../../rich-text-editor";
 import ActionButton from "../../action-button";
 import SectionVisibilityToggler from "../resume-visibility-toggler";
+import { useTranslation } from "react-i18next";
 
 export default function ResumeSummaryEditor() {
   const { storeSetIsEditingResume } = useResumeEditing();
   const { storeGetSummary, storeSetSummary } = useStoreSummary();
-
   const [form] = Form.useForm<ResumeSummary>();
+  const { t } = useTranslation();
+
   form.setFieldsValue(storeGetSummary());
 
   function handleSave() {
@@ -29,7 +31,7 @@ export default function ResumeSummaryEditor() {
   }
 
   return (
-    <ResumeSectionEditorLayout title="Summary">
+    <ResumeSectionEditorLayout title={t("Summary")}>
       <SectionVisibilityToggler sectionName="summary" />
       <div className={styles["form-container"]}>
         <Form
@@ -41,7 +43,7 @@ export default function ResumeSummaryEditor() {
         >
           <Form.Item
             name="selfSummary"
-            label="Self Summary"
+            label={t("Self Summary")}
             rules={[
               {
                 required: true,
@@ -52,7 +54,7 @@ export default function ResumeSummaryEditor() {
             <RichTextEditor />
           </Form.Item>
           <ActionButton type="primary" htmlType="submit">
-            Save
+            {t("Save")}
           </ActionButton>
         </Form>
       </div>

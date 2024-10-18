@@ -8,11 +8,13 @@ import SkillGroupCard from "./SkillGroupCard";
 import { SkillsContext } from "./contexts";
 import ActionButton from "../../action-button";
 import SectionVisibilityToggler from "../resume-visibility-toggler";
+import { useTranslation } from "react-i18next";
 
 export default function ResumeSkillsEditor() {
   const { storeGetSkills, storeSetSkills } = useStoreSkills();
   const { storeSetIsEditingResume } = useResumeEditing();
   const ctx = useSkills(storeGetSkills());
+  const { t } = useTranslation();
 
   function handleSave() {
     storeSetSkills(ctx.states.skills);
@@ -21,7 +23,7 @@ export default function ResumeSkillsEditor() {
   }
 
   return (
-    <ResumeSectionEditorLayout title="Skills">
+    <ResumeSectionEditorLayout title={t("Skills")}>
       <SectionVisibilityToggler sectionName="skills" />
       <SkillsContext.Provider value={ctx}>
         <div className={styles.skills}>
@@ -35,10 +37,10 @@ export default function ResumeSkillsEditor() {
         </div>
         <Space direction="vertical" size="large" style={{ width: "100%" }}>
           <ActionButton type="dashed" onClick={ctx.handlers.handleAddNewGroup}>
-            Add Skills Group
+            {t("Add Skills Group")}
           </ActionButton>
           <ActionButton type="primary" onClick={handleSave}>
-            Save
+            {t("Save")}
           </ActionButton>
         </Space>
       </SkillsContext.Provider>

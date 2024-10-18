@@ -1,18 +1,18 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+import {
+  resumeSectionTranslationsForChinese,
+  resumeSectionTranslationsForEnglish,
+} from "./resume-sections";
+
 const resources = {
   en: {
     translation: {
+      // Home
+      "Get Started": "Get Started",
       // Resume Sections
-      "Resume Sections": "Resume Sections",
-      "Basic Information": "Basic Information",
-      Summary: "Summary",
-      Skills: "Skills",
-      Experience: "Experience",
-      Projects: "Projects",
-      Education: "Education",
-      Languages: "Languages",
+      ...resumeSectionTranslationsForEnglish,
       // Download
       Download: "Download",
       "Download PDF": "Download PDF",
@@ -28,15 +28,10 @@ const resources = {
   },
   zh: {
     translation: {
+      // Home
+      "Get Started": "开始使用",
       // Resume Sections
-      "Resume Sections": "编辑简历",
-      "Basic Information": "基本信息",
-      Summary: "个人总结",
-      Skills: "工作技能",
-      Experience: "工作经验",
-      Projects: "项目描述",
-      Education: "教育信息",
-      Languages: "语言",
+      ...resumeSectionTranslationsForChinese,
       // Download
       Download: "下载",
       "Download PDF": "下载PDF",
