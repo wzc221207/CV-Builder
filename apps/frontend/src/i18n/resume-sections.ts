@@ -30,7 +30,7 @@ export const resumeSectionTranslationsForEnglish = {
   University: "University",
   Major: "Major",
   "Graduation Date": "Graduation Date",
-  "Add Education": "新增工作经验",
+  "Add Education History": "Add Education History",
   // Project
   Project: "Project",
   "Add Project": "Add Project",
@@ -62,7 +62,7 @@ export const resumeSectionTranslationsForChinese = {
   // Summary
   "Self Summary": "自我总结",
   // Skills:
-  "Add Skills Group": "添加分组",
+  "Add Skills Group": "新增技能分组",
   // Experience
   "Company Name": "公司名",
   "Start Date": "开始时间",
@@ -73,7 +73,7 @@ export const resumeSectionTranslationsForChinese = {
   University: "大学名称",
   Major: "专业",
   "Graduation Date": "毕业时间",
-  "Add Education": "新增教育经历",
+  "Add Education History": "新增教育经历",
   // Project
   Project: "项目",
   "Add Project": "新增项目",

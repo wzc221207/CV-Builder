@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.9 (2024-10-20)
+
+Fix
+- fix some translations
+
 ## 0.1.8 (2024-10-19)
 
 Fix

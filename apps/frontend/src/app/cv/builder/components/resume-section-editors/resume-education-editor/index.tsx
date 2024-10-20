@@ -117,7 +117,7 @@ export default function ResumeEducationEditor() {
                     onClick={() => add()}
                     icon={<PlusOutlined />}
                   >
-                    {t("Add Education")}
+                    {t("Add Education History")}
                   </ActionButton>
                 </Form.Item>
               </>
